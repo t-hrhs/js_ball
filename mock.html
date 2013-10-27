@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html"; charset=UTF-8>
+        <title>とりあえずボールを動かす</title>
+    </head>
+    <body>
+        <script type='text/javascript'>
+            myTamaWidth = 100; //PNGファイルの幅(pixel)
+            myTamaHeight = 50; //PNGファイルの高さ(pixel)
+            myX = 0; //ボールの初期値X
+            myY = 0; //ボールの初期値Y
+            myXs = 0; //ボールのスタート位置X
+            myXe = 0; //ボールのエンド位置X
+            myYs = 0; //ボールのスタート位置Y
+            myYe = 0; //ボールのエンド位置Y
+
+            function myTamaMain() {
+                myObj = document.getElementById('tama').style;
+                myXs = document.body.scrollLeft;
+                myYs = document.body.scrollTop;
+                myXe = myXs + document.body.clientWidth - myTamaWidth;
+                myYe = myYs + document.body.clientHeight - myTamaHeight;
+                   // 玉の移動角度(方向)を決める
+                   if (myX<=myXs) myAddX = Math.floor(Math.random()*20)+10;
+                   if (myY<=myYs) myAddY = Math.floor(Math.random()*20)+10;
+                   if (myX>=myXe) myAddX = (Math.floor(Math.random()*20)+10)*(-1);
+                   if (myY>=myYe) myAddY = (Math.floor(Math.random()*20)+10)*(-1);
+                   // 玉を移動
+                   myX = myX + myAddX;
+                   if      (myX < myXs) myX=myXs;
+                   else if (myX > myXe) myX=myXe;
+                   myY = myY + myAddY;
+                   if      (myY < myYs) myY=myYs;
+                   else if (myY > myYe) myY=myYe;
+                   myObj.left = myX;
+                   myObj.top  = myY;
+            }
+        </script>
+        <div id='tama' style="position:absolute"><img src='carrot.png' wigth='100' height='50'></div>
+        <script type="text/javascript">
+                  setInterval( "myTamaMain()", 100 ); // 0.1秒周期に動かす
+        </script>
+    </body>
+</html>
